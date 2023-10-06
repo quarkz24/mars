@@ -46,8 +46,9 @@ for lat in latlist: #in radians
         solar = (q/3.1415) * (((149597870.7*1000)/a)**2) * (big_h*sintheta*np.sin(delta) + costheta*np.cos(delta)*np.sin(big_h))
         flux.append(solar)
         
-    plt.plot(np.arange(0, 365, 1), flux, linestyle = '--')
+    plt.plot(np.arange(0, 365, 1), flux, linestyle = '--', label = f'$latitude = {lat}$')
 
+##TESTING
 #print("delta list is:", d)
 #print("big H list is:", h)
 #print("flux:", flux)
@@ -55,6 +56,12 @@ for lat in latlist: #in radians
 plt.ylabel("Diurnally averaged incident solar flux", fontsize = 10)
 plt.xlabel("Days of the year")
 plt.title("Diurnally averaged incident solar flux per day of the year, beginning Jan 1 (Northern hemisphere)")
+
+##LEGEND
+ax = plt.subplot(111)
+box = ax.get_position()
+ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
+ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
 plt.show()
 
 ##SOUTHERN HEMISPHERE
@@ -79,8 +86,9 @@ for lat in latlist2: #in radians
         solar = (q/3.1415) * (((149597870.7*1000)/a)**2) * (big_h*sintheta*np.sin(delta) + costheta*np.cos(delta)*np.sin(big_h))
         flux.append(solar)
         
-    plt.plot(np.arange(0, 365, 1), flux, linestyle = '--')
+    plt.plot(np.arange(0, 365, 1), flux, linestyle = '--', label = f'$latitude = {lat}$')
 
+##TESTING
 #print("delta list is:", d)
 #print("big H list is:", h)
 #print("flux:", flux)
@@ -88,6 +96,13 @@ for lat in latlist2: #in radians
 plt.ylabel("Diurnally averaged incident solar flux", fontsize = 10)
 plt.xlabel("Days of the year")
 plt.title("Diurnally averaged incident solar flux per day of the year, beginning Jan 1 (Southern hemisphere)")
+
+##LEGEND
+ax = plt.subplot(111)
+box = ax.get_position()
+ax.set_position([box.x0, box.y0, box.width * 0.8, box.height])
+ax.legend(loc='center left', bbox_to_anchor=(1, 0.5))
+plt.show()
 
 end = time.time()
 print("Time elapsed:", end - start)
