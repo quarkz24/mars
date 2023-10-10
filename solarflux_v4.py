@@ -40,7 +40,11 @@ for lat in latlist: #in radians
     
         #2*3.1415/365 to convert day to position around sun
         #delta remains in rad to feed into my trig functions
-    
+        if tantheta >1:
+            tantheta = 1
+        elif tantheta <-1:
+            tantheta = -1
+        
         delta = -0.409*np.cos((2*3.1415/365)*(day + 10))
         big_h = np.arccos(-tantheta * np.tan(delta))
         solar = (q/3.1415) * (((149597870.7*1000)/a)**2) * (big_h*sintheta*np.sin(delta) + costheta*np.cos(delta)*np.sin(big_h))
@@ -70,6 +74,7 @@ latlist2 = [-0.017, -0.17, -0.35, -0.52, -0.70, -0.87, -1.05, -1.22, -1.40, -1.5
 
 for lat in latlist2: #in radians
 
+
     sintheta = np.sin(lat)
     costheta = np.cos(lat)
     tantheta = np.tan(lat)
@@ -80,7 +85,11 @@ for lat in latlist2: #in radians
     
         #2*3.1415/365 to convert day to position around sun
         #delta remains in rad to feed into my trig functions
-    
+        if tantheta >1:
+            tantheta = 1
+        elif tantheta <-1:
+            tantheta = -1
+            
         delta = -0.409*np.cos((2*3.1415/365)*(day + 10))
         big_h = np.arccos(-tantheta * np.tan(delta))
         solar = (q/3.1415) * (((149597870.7*1000)/a)**2) * (big_h*sintheta*np.sin(delta) + costheta*np.cos(delta)*np.sin(big_h))
