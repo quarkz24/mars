@@ -7,8 +7,6 @@ Created on Wed Oct  4 16:18:25 2023
 
 ##V4 adapted from V3, want to add in loop to iterate over 10 deg between 0 -> 90 and 0 -> -90
 ##my trig functions work in radians, as does np.sin etc, so latitude in rad (10deg = 0.17rad)
-##still getting nan issues
-##problem is tan(delta) returning large values (as it mathematically should)
 
 ##NORTHERN HEMISPHERE
 ##PACKAGES AND CONSTANTS AND FUNCTIONS
@@ -21,8 +19,7 @@ import time
 
 start = time.time()
 
-##define constants (or things that are constant for now)
-##my trig functions work in radians, as does np.sin etc, so latitude in rad (10deg = 0.17rad)
+##constants
 
 a = 149597870.7*1000
 q = 1360
@@ -72,7 +69,7 @@ plt.show()
 
 ##SOUTHERN HEMISPHERE
 
-latlist2 = [-0.017, -0.17, -0.35, -0.52, -0.70, -0.87, -1.05, -1.22, -1.40, -1.57]
+latlist2 = [-0, -0.17, -0.35, -0.52, -0.70, -0.87, -1.05, -1.22, -1.40, -1.57]
 
 for lat in latlist2: #in radians
 
