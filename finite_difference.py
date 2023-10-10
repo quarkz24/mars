@@ -39,10 +39,18 @@ temp_list = [300]*len(latitude_list) #this is the temperature at each of the 45 
 #but this only works for first day - need to find way to take the -2 degrees point, which is also evolving
 #maybe within second for loop, before new_temp executes, need line to work out I and A (both temp dependent)
 #think i can define flux outside of loop? since it isn't temp dependent, only latitude
+#need to index into solar list
+
+solar = flux(latitude_list)
 
 for day in range(0, 365, 1):
-    for i in range(len(latitude_list)):
-        new_temp = (2*del_t/c)*(solar*(1-albedo) + d*((temp_list[i+1] - 2*temp_list[i] + temp_list[i-1])/del_lamb) - d*np.tan(latitude_list[i])*((temp_list[i+1] - temp_list[i-1])/2*del_lamb)) + temp_list[i-1] - outgoing
+    for i in range(len(latitude_list)): #does i start at zero?
+        new_temp = (2*del_t/c)*(solar[i][day]*(1-albedo) + d*((temp_list[i+1] - 2*temp_list[i] + temp_list[i-1])/del_lamb) - d*np.tan(latitude_list[i])*((temp_list[i+1] - temp_list[i-1])/2*del_lamb)) + temp_list[i-1] - outgoing
         temp_list[i] = new_temp
+   
+print(solar)
         
 ##plotting
+
+end = time.time()
+print("Time elapsed:", end - start)
