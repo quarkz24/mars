@@ -27,7 +27,7 @@ start = time.time()
 a = 149597870.7*1000
 q = 1360
 
-latlist = [0, 0.17, 0.35, 0.52, 0.70, 0.87, 1.05, 1.22, 1.40, 1.56]
+latlist = [0, 0.17, 0.35, 0.52, 0.70, 0.87, 1.05, 1.22, 1.40, 1.57]
 for lat in latlist: #in radians
 
     sintheta = np.sin(lat)
@@ -72,7 +72,7 @@ plt.show()
 
 ##SOUTHERN HEMISPHERE
 
-latlist2 = [-0.017, -0.17, -0.35, -0.52, -0.70, -0.87, -1.05, -1.22, -1.40, -1.56]
+latlist2 = [-0.017, -0.17, -0.35, -0.52, -0.70, -0.87, -1.05, -1.22, -1.40, -1.57]
 
 for lat in latlist2: #in radians
 
@@ -90,10 +90,12 @@ for lat in latlist2: #in radians
             
         delta = -0.409*np.cos((2*3.1415/365)*(day + 10))
         big_h = np.arccos(-tantheta * np.tan(delta))
+        
         if -tantheta*np.tan(delta) >1:
             big_h = np.arccos(1)
         elif -tantheta*np.tan(delta) <-1:
             big_h = np.arccos(-1)
+            
         solar = (q/3.1415) * (((149597870.7*1000)/a)**2) * (big_h*sintheta*np.sin(delta) + costheta*np.cos(delta)*np.sin(big_h))
         flux.append(solar)
         
