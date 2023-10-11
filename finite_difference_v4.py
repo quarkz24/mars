@@ -49,10 +49,13 @@ for day in range(1, len(times)): #1->364 - only 364 loops?
     
     for y in range(0, n-1): #1->142, since n-1 is 143 - surely need 143? #note i have changed this - guy in vid starts at 1
         
-    temp_list[y] = (2*del_t/c)*(d*((temp_list[y+1] - 2*temp_list[y] + temp_list[y-1])/del_lamb**2) - d*np.tan(latitude_list[y])*((temp_list[y+1] - temp_list[y-1])/2*del_lamb)) + temp_list[y-1] #wondering whether del_lamb rly is 1.25, given the shortened latitude list
+        tir = 0.79*((temp_list[y]/273)**3)
+        outgoing = (sb * temp_list[y]**4)/(1+ (3/4)*tir)
+        
+        temp_list[y] = (2*del_t/c)*(d*((temp_list[y+1] - 2*temp_list[y] + temp_list[y-1])/del_lamb**2) - d*np.tan(latitude_list[y])*((temp_list[y+1] - temp_list[y-1])/2*del_lamb) - outgoing) + temp_list[y-1] #wondering whether del_lamb rly is 1.25, given the shortened latitude list
     
-    temp_list[0] = (2*del_t/c)*(d*(temp_list[0+1] - temp_list[0])/del_lamb**2) + temp_list[0-1] #for south pole - what do with temp_list[-1]? boundary condition?
-    temp_list[n-1] = (2*del_t/c)*(d*(-(temp_list[n-1] - temp_list[n-2])/del_lamb**2)) + temp_list[n-2] #for north pole
+    temp_list[0] = (2*del_t/c)*(d*(temp_list[0+1] - temp_list[0])/del_lamb**2 - outgoing) + temp_list[0-1] #for south pole - what do with temp_list[-1]? boundary condition?
+    temp_list[n-1] = (2*del_t/c)*(d*(-(temp_list[n-1] - temp_list[n-2])/del_lamb**2) - outgoing) + temp_list[n-2] #for north pole
 
     plt.figure(1)
     plt.plot(latitude_list, temp_list)
@@ -61,5 +64,7 @@ for day in range(1, len(times)): #1->364 - only 364 loops?
     plt.ylabel('Temperature (C)')
     plt.show()
     plt.pause(0.01) 
+    
+
 end = time.time()
 print("Time elapsed:", end - start)
