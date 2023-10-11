@@ -56,10 +56,19 @@ for day in range(0, 365, 1):
         temp_list[i] = new_temp
    
     print("temps for", day, ":", temp_list)
+    
+    #plotting
+    plt.figure(1)
+    plt.plot(latitude_list, temp_list)
+    plt.axis([-1.57, 1.57, 0, 700])
+    plt.xlabel('Distance (m), day ', )
+    plt.ylabel('Temperature (C)')
+    plt.show()
+    plt.pause(0.01) 
 #print(solar)
 print()
         
-##plotting
+
 
 end = time.time()
 print("Time elapsed:", end - start)
