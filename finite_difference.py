@@ -27,9 +27,10 @@ sb = 5.670374419e-8
 
 ##arrays/lists
 
-latitude_list = np.linspace(0, 1.57, 45) #in radians
-temp_list = [300]*len(latitude_list) #this is the temperature at each of the 45 points on the Northern hemisphere
+latitude_list = np.linspace(-1.57, 1.57, 90) #in radians
+temp_list = [initial_t]*len(latitude_list) #this is the temperature at each of the 45 points on the Northern hemisphere
 
+#print("temps is:", temp_list)
 ##for loops - finite difference method
 
 #possibly add in: if first run through (if i = 0, first lat point, the equator) then taken the i-1 element to be 300 - 
@@ -41,7 +42,7 @@ temp_list = [300]*len(latitude_list) #this is the temperature at each of the 45 
 solar = flux(latitude_list)
 
 for day in range(0, 365, 1):
-    for i in range(len(latitude_list)): #does i start at zero?
+    for i in range(len(latitude_list)-1): #does i start at zero?
         
         #IR cooling function
         tir = 0.79*((temp_list[i]/273)**3)
@@ -54,7 +55,9 @@ for day in range(0, 365, 1):
         new_temp = (2*del_t/c)*(solar[i][day]*(1-albedo) + d*((temp_list[i+1] - 2*temp_list[i] + temp_list[i-1])/del_lamb) - d*np.tan(latitude_list[i])*((temp_list[i+1] - temp_list[i-1])/2*del_lamb)) + temp_list[i-1] - outgoing
         temp_list[i] = new_temp
    
-print(solar)
+    print("temps for", day, ":", temp_list)
+#print(solar)
+print()
         
 ##plotting
 
