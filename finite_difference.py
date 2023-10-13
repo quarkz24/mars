@@ -22,7 +22,7 @@ a = 149597870.7*1000
 c = 40 * 5.25e9 #heat cap, initially constant, of water planet 
 del_t = 1
 del_lamb = 2 * (3.1415/180) #in degrees->radians
-initial_t = 300
+initial_t = 350
 sb = 5.670374419e-8
 
 ##arrays/lists
@@ -52,10 +52,10 @@ for day in range(0, 365, 1):
         albedo = 0.525 - 0.245*np.tanh((temp_list[i]-268)/5)
         
         #finite difference method
-        new_temp = (2*del_t/c)*(solar[i][day]*(1-albedo) + d*((temp_list[i+1] - 2*temp_list[i] + temp_list[i-1])/del_lamb) - d*np.tan(latitude_list[i])*((temp_list[i+1] - temp_list[i-1])/2*del_lamb)) + temp_list[i-1] - outgoing
+        new_temp = (2*del_t/c)*(solar[i][day]*(1-albedo) + d*((temp_list[i+1] - 2*temp_list[i] + temp_list[i-1])/del_lamb) - d*np.tan(latitude_list[i])*((temp_list[i+1] - temp_list[i-1])/2*del_lamb)) + temp_list[day-1] - outgoing
         temp_list[i] = new_temp
    
-    print("temps for", day, ":", temp_list)
+    print("temps for day", day, ":", temp_list)
     
     #plotting
     plt.figure(1)
