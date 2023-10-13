@@ -8,12 +8,13 @@ Created on Tue Oct 10 15:35:41 2023
 ##intended as a program that I can pull into finite_difference.py
 ##so no constants/plotting found here
 ##returns a list of lists, indexable
+#for each latitude, then returns list of flux over a year
 
 ##import packages
 
 import numpy as np
-import matplotlib.pyplot as plt
-import time
+#import matplotlib.pyplot as plt
+#import time
 
 ##constants (can get rid of these when its a functioning function)
 

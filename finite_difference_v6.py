@@ -18,7 +18,7 @@ start = time.time()
 
 q = 1360
 d = 0.0001 #diffusivity, placeholder, inaccurate
-a = 149597870.7*1000 
+a = 0.5 #also false
 c = 40 * 5.25e9 #heat cap, initially constant, of water planet 
 sb = 5.670374419e-8
 
@@ -32,9 +32,11 @@ final_time = 365
 
 temps = [initial_temp]*n #144 length list of initial temps
 lats = np.linspace(-1.57, 1.57, n) #both start and end inclusive
-solar = flux(lats) #returns a list of lists, indexable
+solar = flux(lats) #returns a list of lists, indexable, returns list of flux over a year per lat
+
 print("lats: ",len(lats))
 print("temps: ", len(temps))
+print("incoming flux: ", len(solar)) #144 lists of flux, for 144 latitudes
 
 
 ##looping
