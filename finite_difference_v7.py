@@ -34,7 +34,7 @@ final_time = 365*40
 
 temps = [initial_temp]*n #144 length list of initial temps
 lats = np.linspace(-1.57, 1.57, n) #both start and end inclusive
-solar = flux(lats) #returns a list of lists, indexable, returns list of flux over a year per lat
+solar = flux(lats, final_time) #returns a list of lists, indexable, returns list of flux over a year per lat
 temp_diff = np.empty(n)
 ##do i need a new list? a different method - feed in 300s, populate new list
 print("lats: ",len(lats))
@@ -54,8 +54,8 @@ for day in range(0, final_time, del_t): #gives list 0->364, 365 entries
         #x = solar[y][day]
         temp_diff[y] = (2*del_t/c)*(solar[y][day]*(1-a) - d*np.tan(lats[y])*((temps[y+1]-temps[y-1])/2*del_lamb) + d*((temps[y+1]-2*temps[y] + temps[y-1])/(del_lamb**2)) - ir)
     
-    temps[len(lats)-1] = (2*del_t/c)*(solar[y][day]*(1-a) - d*(temps[y] - temps[y-1])/(del_lamb**2)) # north pole
-    temps[0] = (2*del_t/c)*(solar[y][day]*(1-a) - d*((temps[y+1] - temps[y])/del_lamb**2)) #south pole - what is day-1 for first day?
+    temp_diff[len(lats)-1] = (2*del_t/c)*(solar[y][day]*(1-a) - d*(temps[y] - temps[y-1])/(del_lamb**2)) # north pole
+    temp_diff[0] = (2*del_t/c)*(solar[y][day]*(1-a) - d*((temps[y+1] - temps[y])/del_lamb**2)) #south pole - what is day-1 for first day?
     
     temps = temp_diff + temps
     
