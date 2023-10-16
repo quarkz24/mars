@@ -23,7 +23,7 @@ q = 1360
 
 #latlist = [0, 0.17, 0.35, 0.52, 0.70, 0.87, 1.05, 1.22, 1.40, 1.57]
 
-def flux(latlist):
+def flux(latlist, d):
         
     all_flux = []
     
@@ -35,7 +35,7 @@ def flux(latlist):
         
         flux = []
     
-        for day in range(0, 365, 1):
+        for day in range(0, d, 1):
         
             #2*3.1415/365 to convert day to position around sun
             #delta remains in rad to feed into my trig functions
