@@ -76,7 +76,7 @@ for day in range(0, final_time, del_t): #gives list 0->364, 365 entries
         plt.figure(1)
         plt.plot(lats, temps)
         plt.plot(lats, n*[273.15])
-        plt.axis([-1.57, 1.57, 0, 500])
+        plt.axis([-1.57, 1.57, 200, 350])
         plt.xlabel(f'latitude, $day = {day}$') #label = f'$latitude = {lat}$'
         plt.ylabel('Temps')
         plt.show()
