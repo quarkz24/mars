@@ -11,6 +11,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import time
 from flux_function import flux
+import matplotlib.pylab as plt
+import seaborn as sns
 
 start = time.time()
 
@@ -25,7 +27,8 @@ n = 144
 del_t = 1
 del_lamb = 1.25 * (3.1415/180) #in degrees->radians
 initial_temp = 300
-final_time = 365*40 #years * days
+years = 40
+final_time = 365*years #years * days
 
 second_to_day = 24*60*60
 
@@ -35,11 +38,12 @@ temps = [initial_temp]*n #144 length list of initial temps
 lats = np.linspace(-1.57, 1.57, n) #both start and end inclusive
 solar = flux(lats, final_time) #returns a list of lists, indexable, returns list of flux over a year per lat
 temp_diff = np.empty(n) # empty list
-
+#heat = []
+heat = [[0] for i in range(years)]
 ##looping
 
 for day in range(0, final_time, del_t): #gives list 0->364, 365 entries
-    print("day: ", day)
+
     for y in range(len(lats)-1): #0->143, 144 entries
     
         #ir cooling function
@@ -56,16 +60,33 @@ for day in range(0, final_time, del_t): #gives list 0->364, 365 entries
     
     temps = temp_diff + temps
     
-    if day % 364 == 0:
+    if day % 365 == 0:
         
+        #heat.append(temps)
+        year = int(day/365)
+        print("year is ", year)
+        heat[year] = temps
+        
+        fit = 302.3 - 45.3*(np.sin(lats)**2) #coakley model
         plt.figure(1)
         plt.plot(lats, temps)
-        plt.plot(lats, n*[273.15])
+        plt.plot(lats, n*[273.15]) #zero degrees celcius
+        plt.plot(lats, fit)
         plt.axis([-1.57, 1.57, 200, 350])
-        plt.xlabel(f'latitude, $day = {day}$')
+        plt.xlabel(f'latitude, $year = {day/365}$')
         plt.ylabel('Temps')
         plt.show()
         plt.pause(0.001) 
     
+print("heat list is ", heat)
+print("heat array is ", np.array(heat))
+
+plt.figure(figsize=(10,10))
+heat_map = sns.heatmap(np.array(heat).T, linewidth = 1 , annot = False)
+plt.title("Temperatures per year as model settles over 40 years, at each latitude")
+plt.xlabel("Year")
+plt.ylabel("Latitude")
+plt.show()
+
 end = time.time()
 print("Time elapsed:", end - start)
