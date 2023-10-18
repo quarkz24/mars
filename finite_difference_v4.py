@@ -34,15 +34,15 @@ print
 ##arrays/lists
 #180/1.25 = 144 nodes, so 143 midpoints?
 latitude_list = np.linspace(-1.57 + del_lamb/2, 1.57-del_lamb/2,n) #goes from -1.559 to 1.559, 144 points, in 1.25deg interval
-print("latitudes: ", latitude_list, "length of latitude list: ", len(latitude_list))
+#print("latitudes: ", latitude_list, "length of latitude list: ", len(latitude_list))
 temp_list = [initial_t]*len(latitude_list) # 144 long, all 300
-print("initial temps: ", temp_list, "length of initial temps list: ", len(temp_list))
+#print("initial temps: ", temp_list, "length of initial temps list: ", len(temp_list))
 #dTdt = np.zeros(n) # list of 144 zeroes
 #print("deriv. list: ", dTdt, "length: ", len(dTdt))
 times = np.arange(0, final_time, 1) # 0->364, 365 long
-print("times: ", times, "length: ", len(times))
+#print("times: ", times, "length: ", len(times))
 temp_list = [initial_t]*len(latitude_list) #144 300s
-print("temperatures list: ", temp_list, "length: ", len(temp_list))
+#print("temperatures list: ", temp_list, "length: ", len(temp_list))
 
 #s(1-a), I, not included
 for day in range(1, len(times)): #1->364 - only 364 loops?

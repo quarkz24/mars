@@ -26,7 +26,7 @@ sb = 5.670374419e-8
 
 del_t = 1
 del_lamb = l/n #in degrees->radians
-initial_temp = 300 #don't need different temps for poles
+initial_temp = 350 #don't need different temps for poles
 final_time = 2 #days, 1yr for now
 
 latitude_list = np.linspace(-1.57, 1.57, 144) # this prints a fine list, but maybe need to be in middle of columns
@@ -53,7 +53,7 @@ for day in range(1, len(time_list)): #365 entries long
         #index list error is because solar[i] only goes up to 90 altitudes and we are looping over 142 entries
         #IR cooling function
         tir = 0.79*((temp_list[i]/273)**3)
-        outgoing = (sb * temp_list[i]**4)/(1+ (3/4)*tir)
+        outgoing = (sb * temp_list[i]**4)/(1+ (3/4)*tir) #OUTGOING IN WRONG PLACE BELOW!!!
         #print(type(outgoing))
         #albedo
         albedo = 0.525 - 0.245*np.tanh((temp_list[i]-268)/5)

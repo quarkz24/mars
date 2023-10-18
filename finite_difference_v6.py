@@ -4,7 +4,8 @@ Created on Fri Oct 13 09:05:39 2023
 
 @author: josep
 """
-
+##next step is to get rid of animation and evolve for fat amount of years
+##check constants 
 ##import packages
 
 import numpy as np
@@ -17,9 +18,9 @@ start = time.time()
 ##constants
 
 q = 1360*24*60*60
-d = 0.001 #diffusivity, placeholder, inaccurate
+d = 0.1 #diffusivity, placeholder, inaccurate
 a = 0.1 #also false
-c = 4000 #heat cap, initially constant, of water planet 
+c = (5.25e9)*40 #heat cap, initially constant, of water planet 
 sb = 5.670374419e-8
 
 n = 144
@@ -48,6 +49,8 @@ for day in range(0, final_time, del_t): #gives list 0->364, 365 entries
         tir = 0.79*((temps[y]/273)**3)
         ir = (sb*temps[y])/(1+0.75*tir)
         
+        #x = temps[day-1]
+        #x = solar[y][day]
         #when this eventually works and updates the list, heat cap might make the temps tiny? check units in paper
         temps[y+1] = (2*del_t/c)*(solar[y][day]*(1-a) - d*np.tan(lats[y])*((temps[y+1]-temps[y-1])/2*del_lamb) + d*((temps[y+1]-2*temps[y] + temps[y-1])/(del_lamb**2)) - ir) + temps[day-1]
     
@@ -56,13 +59,13 @@ for day in range(0, final_time, del_t): #gives list 0->364, 365 entries
     
     print("temps for day", day, ":", temps)
     
-    plt.figure(1)
-    plt.plot(lats, temps)
-    plt.axis([-1.57, 1.57, 0, 700])
-    plt.xlabel(f'latitude, $day = {day}$') #label = f'$latitude = {lat}$'
-    plt.ylabel('Temps')
-    plt.show()
-    plt.pause(0.01) 
+    #plt.figure(1)
+    #plt.plot(lats, temps)
+    #plt.axis([-1.57, 1.57, 0, 700])
+    #plt.xlabel(f'latitude, $day = {day}$') #label = f'$latitude = {lat}$'
+    #plt.ylabel('Temps')
+    #plt.show()
+    #plt.pause(0.01) 
     
 end = time.time()
 print("Time elapsed:", end - start)

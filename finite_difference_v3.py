@@ -31,10 +31,11 @@ t_final = 365  #Tiempo final en segundos
 dt = 1
 
 x = np.linspace(-1.57+dx/2, 1.57-dx/2, n)
-T = np.ones(n)*T0
+T = np.ones(n)*initial_t
 dTdt = np.empty(n)
 t = np.arange(0, t_final, dt)
 
+print(T)
 solar = flux(x)
 
 for j in range(1,len(t)):
