@@ -25,9 +25,9 @@ sb = 5.670374419e-8 #stefan-boltzmann constant
 
 n = 144
 del_t = 1
-del_lamb = 1.25 * (3.1415/180) #in degrees->radians
-initial_temp = 300
-years = 40
+del_lamb = 3.1415/n #in degrees->radians
+initial_temp = 400
+years = 80
 final_time = 365*years #years * days
 
 second_to_day = 24*60*60
@@ -55,7 +55,22 @@ for day in range(0, final_time, del_t): #gives list 0->364, 365 entries
         
         temp_diff[y] = (2*del_t/c)*(second_to_day*solar[y][day]*(1-a) - d*np.tan(lats[y])*((temps[y+1]-temps[y-1])/2*del_lamb) + d*((temps[y+1]-2*temps[y] + temps[y-1])/(del_lamb**2)) - ir)
 
+    #ir cooling function
+    tir = 0.79*((temps[0]/273)**3)
+    ir = ((sb*(temps[0])**4)/(1+0.75*tir))*second_to_day
+    
+    #albedo
+    a = 0.525 - 0.245*np.tanh((temps[0]-268)/5)
+    
     temp_diff[0] = (2*del_t/c)*(second_to_day*solar[y][day]*(1-a) - d*((temps[y+1] - temps[y])/del_lamb**2) - ir) #south pole - what is day-1 for first day?
+    
+    #ir cooling function
+    tir = 0.79*((temps[len(lats)-1]/273)**3)
+    ir = ((sb*(temps[len(lats)-1])**4)/(1+0.75*tir))*second_to_day
+    
+    #albedo
+    a = 0.525 - 0.245*np.tanh((temps[len(lats)-1]-268)/5)
+    
     temp_diff[len(lats)-1] = (2*del_t/c)*(second_to_day*solar[y][day]*(1-a) - d*(temps[y] - temps[y-1])/(del_lamb**2) - ir) # north pole
     
     temps = temp_diff + temps
@@ -77,13 +92,11 @@ for day in range(0, final_time, del_t): #gives list 0->364, 365 entries
         plt.ylabel('Temps')
         plt.show()
         plt.pause(0.001) 
-    
-print("heat list is ", heat)
-print("heat array is ", np.array(heat))
 
 plt.figure(figsize=(10,10))
-heat_map = sns.heatmap(np.array(heat).T, linewidth = 1 , annot = False)
-plt.title("Temperatures per year as model settles over 40 years, at each latitude")
+#y_axis_labels = np.linspace(-90, 90, 144)
+heat_map = sns.heatmap(np.array(heat).T, linewidth = 0 , annot = False, cbar_kws={'label': 'Temperature (K)'}, yticklabels = 6)
+plt.title(f"Temperatures per year as model settles over ${years}$ years, at each latitude")
 plt.xlabel("Year")
 plt.ylabel("Latitude")
 plt.show()
