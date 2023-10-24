@@ -28,7 +28,7 @@ n = 144
 del_t = 1
 del_lamb = 3.1415/n #in degrees->radians
 initial_temp = 300
-years = 5
+years = 2
 final_time = 365*years #years * days
 
 second_to_day = 24*60*60
