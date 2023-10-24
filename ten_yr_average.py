@@ -55,51 +55,45 @@ for day in range(0, final_time, del_t): #gives list 0->364, 365 entries
         
         #albedo
         a = 0.525 - 0.245*np.tanh((temps[y]-268)/5)
-        #print("albedo at ", lats[y], "is ", a)
         
         temp_diff[y] = (2*del_t/c)*(second_to_day*solar[y][day]*(1-a) - d*np.tan(lats[y])*((temps[y+1]-temps[y-1])/2*del_lamb) + d*((temps[y+1]-2*temps[y] + temps[y-1])/(del_lamb**2)) - ir)
 
-    #ir cooling function
+    #ir, albedo
     tir = 0.79*((temps[0]/273)**3)
     ir = ((sb*(temps[0])**4)/(1+0.75*tir))*second_to_day
-    
-    #albedo
     a = 0.525 - 0.245*np.tanh((temps[0]-268)/5)
-    #print("albedo at ", lats[y], "is ", a)
+
     temp_diff[0] = (2*del_t/c)*(second_to_day*solar[y][day]*(1-a) - d*((temps[y+1] - temps[y])/del_lamb**2) - ir) #south pole - what is day-1 for first day?
     
-    #ir cooling function
+    #ir, albedo
     tir = 0.79*((temps[len(lats)-1]/273)**3)
     ir = ((sb*(temps[len(lats)-1])**4)/(1+0.75*tir))*second_to_day
-    
-    #albedo
     a = 0.525 - 0.245*np.tanh((temps[len(lats)-1]-268)/5)
-    #print("albedo at ", lats[y], "is ", a)
+
     temp_diff[len(lats)-1] = (2*del_t/c)*(second_to_day*solar[y][day]*(1-a) - d*(temps[y] - temps[y-1])/(del_lamb**2) - ir) # north pole
     
     temps = temp_diff + temps
-    #cumu = [temps[i] + cumu[i] for i in range(len(temps))]
     cumu = cumu + temps
-    #print("temps on day ", day, temps)
-    #print("cumulative at ", day, "is ", cumu)
     
     if day % 365 == 0:
         
-        #heat.append(temps)
         year = int(day/365)
-        #print("year is ", year)
         heat[year] = temps
         av_list.append([val/365 for val in cumu])
-        cumu = np.zeros(n)
+        cumu = np.zeros(n) #clear cumulative list for next year
         print("year ", year, " length ", len(av_list))
         print("av ", av_list[year])
         
-        fit = 302.3 - 45.3*(np.sin(lats)**2) #coakley model
         plt.figure(1)
-        #plt.plot(lats, temps)
-        plt.plot(lats, av_list[year])
+        if year > 9:
+            add = [sum(i) for i in zip(av_list[-1], av_list[-2], av_list[-3], av_list[-4], av_list[-5], av_list[-6], av_list[-7], av_list[-8], av_list[-9], av_list[-10])]
+            div = [val/10 for val in add]
+            plt.plot(lats, div) #ten yr average
+        
+        fit = 302.3 - 45.3*(np.sin(lats)**2) #coakley model
+        plt.plot(lats, temps) #temps per year
         plt.plot(lats, n*[273.15]) #zero degrees celcius
-        #plt.plot(lats, fit)
+        plt.plot(lats, fit) #coakley model
         plt.axis([-1.57, 1.57, 200, 350])
         plt.xlabel(f'latitude, $year = {day/365}$')
         plt.ylabel('Temps')
@@ -107,7 +101,6 @@ for day in range(0, final_time, del_t): #gives list 0->364, 365 entries
         plt.pause(0.01) 
 
 plt.figure(figsize=(10,10))
-#y_axis_labels = np.linspace(-90, 90, 144)
 heat_map = sns.heatmap(np.array(heat).T, linewidth = 0 , annot = False, cbar_kws={'label': 'Temperature (K)'}, yticklabels = 6)
 plt.title(f"Temperatures per year as model settles over ${years}$ years, at each latitude")
 plt.xlabel("Year")
