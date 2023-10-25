@@ -11,27 +11,25 @@ import numpy as np
 import matplotlib.pyplot as plt
 import time
 from flux_function import flux
-import matplotlib.pylab as plt
 import seaborn as sns
 
 start = time.time()
 
 ##constants
 
+second_to_day = 24*60*60
 q = 1362
-d = 5.394e2 #diffusivity
-c = (5.25e9) #heat cap, initially constant, of dry planet
+d = (5.394e-1)*second_to_day #diffusivity
+cl = (5.25e6) #heat cap, initially constant, of dry planet
+cl = 5.25e7
 sb = 5.670374419e-8 #stefan-boltzmann constant
-a = 0.3
-
+#a = 0.3
 n = 144
 del_t = 1
 del_lamb = 3.1415/n #in degrees->radians
 initial_temp = 300
-years = 40
+years = 100
 final_time = 365*years #years * days
-
-second_to_day = 24*60*60
 
 ##arrays+lists
 
@@ -43,29 +41,40 @@ heat = [[0] for i in range(years)]
 cumu = np.zeros(n)
 av_list = []
 
+##functions
+
+def heatcap(capacity):
+    if temps[y] >= 273:
+        c = cl*40*0.7 + cl*0.3
+    elif 263 < temps[y] < 273:
+        c = 9.2*cl
+    else:
+        c = 2*cl
+    return c
+
 ##looping
 
 for day in range(0, final_time, del_t): #gives list 0->364, 365 entries
 
     for y in range(len(lats)-1): #0->143, 144 entries
-    
+        
         #ir, albedo
-        tir = 0.79*((temps[y]/273)**3)
+        tir = 0.79*((temps[y]/273)**3)  
         ir = ((sb*(temps[y])**4)/(1+0.75*tir))*second_to_day
         a = 0.525 - 0.245*np.tanh((temps[y]-268)/5)
-        temp_diff[y] = (2*del_t/c)*(second_to_day*solar[y][day]*(1-a) - d*np.tan(lats[y])*((temps[y+1]-temps[y-1])/2*del_lamb) + d*((temps[y+1]-2*temps[y] + temps[y-1])/(del_lamb**2)) - ir)
+        temp_diff[y] = (del_t/heatcap(cl))*(second_to_day*solar[y][day]*(1-a) - d*np.tan(lats[y])*((temps[y+1]-temps[y-1])/2*del_lamb) + d*((temps[y+1]-2*temps[y] + temps[y-1])/(del_lamb**2)) - ir)
 
     #ir, albedo
     tir = 0.79*((temps[0]/273)**3)
     ir = ((sb*(temps[0])**4)/(1+0.75*tir))*second_to_day
     a = 0.525 - 0.245*np.tanh((temps[0]-268)/5)
-    temp_diff[0] = (2*del_t/c)*(second_to_day*solar[y][day]*(1-a) - d*((temps[y+1] - temps[y])/del_lamb**2) - ir) #south pole - what is day-1 for first day?
+    temp_diff[0] = (del_t/heatcap(cl))*(second_to_day*solar[0][day]*(1-a) + d*((temps[0+1] - temps[0])/del_lamb**2) - ir) #south pole - what is day-1 for first day?
     
     #ir, albedo
     tir = 0.79*((temps[len(lats)-1]/273)**3)
     ir = ((sb*(temps[len(lats)-1])**4)/(1+0.75*tir))*second_to_day
     a = 0.525 - 0.245*np.tanh((temps[len(lats)-1]-268)/5)
-    temp_diff[len(lats)-1] = (2*del_t/c)*(second_to_day*solar[y][day]*(1-a) - d*(temps[y] - temps[y-1])/(del_lamb**2) - ir) # north pole
+    temp_diff[len(lats)-1] = (del_t/heatcap(cl))*(second_to_day*solar[len(lats)-1][day]*(1-a) - d*(temps[len(lats)-1] - temps[len(lats)-1-1])/(del_lamb**2) - ir) # north pole
     
     temps = temp_diff + temps
     cumu = cumu + temps
