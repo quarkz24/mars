@@ -20,15 +20,14 @@ start = time.time()
 second_to_day = 24*60*60
 q = 1362
 d = (5.394e-1)*second_to_day #diffusivity
-cl = (5.25e6) #heat cap, initially constant, of dry planet
+#cl = (5.25e6) #heat cap, initially constant, of dry planet
 cl = 5.25e7
 sb = 5.670374419e-8 #stefan-boltzmann constant
-#a = 0.3
 n = 144
 del_t = 1
 del_lamb = 3.1415/n #in degrees->radians
 initial_temp = 300
-years = 100
+years = 40
 final_time = 365*years #years * days
 
 ##arrays+lists
@@ -39,9 +38,21 @@ solar = flux(lats, final_time) #returns a list of lists, indexable, returns list
 temp_diff = np.empty(n) # empty list
 heat = [[0] for i in range(years)]
 cumu = np.zeros(n)
+true_diff = np.zeros(years)
+percent_diff = np.zeros(years)
 av_list = []
+coakley_fit = 302.3 - 45.3*(np.sin(lats)**2)
 
 ##functions
+
+
+def heatmap(array):
+    plt.figure(figsize=(10,10))
+    heat_map = sns.heatmap(np.array(array).T, linewidth = 0 , annot = False, cbar_kws={'label': 'Temperature (K)'}, yticklabels = 6)
+    plt.title(f"Temperatures per year as model settles over ${years}$ years, at each latitude")
+    plt.xlabel("Year")
+    plt.ylabel("Latitude")
+    plt.show()
 
 def heatcap(capacity):
     if temps[y] >= 273:
@@ -52,29 +63,54 @@ def heatcap(capacity):
         c = 2*cl
     return c
 
+def outgoing_1(index):
+    infrared = ((sb*(temps[y])**4)/(1.75))*second_to_day
+    albedo = 0.5 - 0.2*np.tanh((temps[index]-268)/5)
+    return infrared, albedo
+
+def outgoing_2(index):
+    tir = 0.79*((temps[y]/273)**3)
+    infrared = ((sb*(temps[y])**4)/(1+0.75*tir))*second_to_day
+    albedo = 0.525 - 0.245*np.tanh((temps[y]-268)/5)
+    return infrared, albedo
+
+def outgoing_3(index):
+    const_a = 2.033e4
+    const_b = 2.094
+    infrared = const_a + const_b*temps[index]
+    albedo = 0.475 - 0.225*np.tanh((temps[y]-268)/5)
+    return infrared, albedo
+
+def convergence_test_1a(diff_list):
+    plt.figure(figsize=(10,10))
+    plt.plot(np.arange(0, years), diff_list)
+    plt.title("Convergence test 1a: difference to N&C fit over years")
+    plt.xlabel("Year")
+    plt.ylabel("Mean difference, K")
+    plt.show()
+    
+def convergence_test_1b(diff_list):
+    plt.figure(figsize=(10,10))
+    plt.plot(np.arange(0, years), diff_list)
+    plt.title("Convergence test 1b: percentage difference to N&C fit over years")
+    plt.xlabel("Year")
+    plt.ylabel("Mean difference, %")
+    plt.show()
+
 ##looping
 
 for day in range(0, final_time, del_t): #gives list 0->364, 365 entries
 
     for y in range(len(lats)-1): #0->143, 144 entries
         
-        #ir, albedo
-        tir = 0.79*((temps[y]/273)**3)  
-        ir = ((sb*(temps[y])**4)/(1+0.75*tir))*second_to_day
-        a = 0.525 - 0.245*np.tanh((temps[y]-268)/5)
+        ir, a = outgoing_2(y)
         temp_diff[y] = (del_t/heatcap(cl))*(second_to_day*solar[y][day]*(1-a) - d*np.tan(lats[y])*((temps[y+1]-temps[y-1])/2*del_lamb) + d*((temps[y+1]-2*temps[y] + temps[y-1])/(del_lamb**2)) - ir)
 
-    #ir, albedo
-    tir = 0.79*((temps[0]/273)**3)
-    ir = ((sb*(temps[0])**4)/(1+0.75*tir))*second_to_day
-    a = 0.525 - 0.245*np.tanh((temps[0]-268)/5)
+    ir, a = outgoing_2(0)
     temp_diff[0] = (del_t/heatcap(cl))*(second_to_day*solar[0][day]*(1-a) + d*((temps[0+1] - temps[0])/del_lamb**2) - ir) #south pole - what is day-1 for first day?
     
-    #ir, albedo
-    tir = 0.79*((temps[len(lats)-1]/273)**3)
-    ir = ((sb*(temps[len(lats)-1])**4)/(1+0.75*tir))*second_to_day
-    a = 0.525 - 0.245*np.tanh((temps[len(lats)-1]-268)/5)
-    temp_diff[len(lats)-1] = (del_t/heatcap(cl))*(second_to_day*solar[len(lats)-1][day]*(1-a) - d*(temps[len(lats)-1] - temps[len(lats)-1-1])/(del_lamb**2) - ir) # north pole
+    ir, a = outgoing_2(-1)
+    temp_diff[-1] = (del_t/heatcap(cl))*(second_to_day*solar[-1][day]*(1-a) - d*(temps[-1] - temps[-1-1])/(del_lamb**2) - ir) # north pole
     
     temps = temp_diff + temps
     cumu = cumu + temps
@@ -82,6 +118,8 @@ for day in range(0, final_time, del_t): #gives list 0->364, 365 entries
     if day % 365 == 0:
         
         year = int(day/365)
+        true_diff[year] = np.average(abs(coakley_fit - temps))
+        percent_diff[year] = np.average(abs((coakley_fit[y]-temps[y])/coakley_fit[y])*100)
         heat[year] = temps
         av_list.append([val/365 for val in cumu])
         cumu = np.zeros(n) #clear cumulative list for next year
@@ -91,23 +129,21 @@ for day in range(0, final_time, del_t): #gives list 0->364, 365 entries
             div = [val/10 for val in add]
             plt.plot(lats, div, label = "10 year average", color = 'blue', linestyle = '--') #ten yr average
         
-        fit = 302.3 - 45.3*(np.sin(lats)**2) #coakley model
         plt.plot(lats, temps, label = "finite diff method", color = 'blue') #temps per year
         plt.plot(lats, n*[273.15], color = 'black') #zero degrees celcius
-        plt.plot(lats, fit, label = "N&C fit", color = 'red') #coakley model
-        plt.axis([-1.57, 1.57, 200, 350])
+        plt.plot(lats, coakley_fit, label = "N&C fit", color = 'red') #coakley model
+        plt.axis([-1.57, 1.57, 240, 320])
         plt.xlabel(f'latitude, $year = {day/365}$')
         plt.ylabel('Temps')
         plt.legend()
-        plt.show()
-        plt.pause(0.01) 
+        plt.show() 
 
-plt.figure(figsize=(10,10))
-heat_map = sns.heatmap(np.array(heat).T, linewidth = 0 , annot = False, cbar_kws={'label': 'Temperature (K)'}, yticklabels = 6)
-plt.title(f"Temperatures per year as model settles over ${years}$ years, at each latitude")
-plt.xlabel("Year")
-plt.ylabel("Latitude")
-plt.show()
+##heatmap
+heatmap(heat)
+
+##convergence testing
+convergence_test_1a(true_diff)
+convergence_test_1b(percent_diff)
 
 end = time.time()
 print("Time elapsed:", end - start)

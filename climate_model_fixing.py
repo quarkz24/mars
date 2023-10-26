@@ -28,7 +28,7 @@ n = 144
 del_t = 1
 del_lamb = 3.1415/n #in degrees->radians
 initial_temp = 300
-years = 2
+years = 100
 final_time = 365*years #years * days
 
 second_to_day = 24*60*60
@@ -44,8 +44,8 @@ heat = [[0] for i in range(years)]
 little_list = [0]*n
 big_list = [[0] for i in range(years)]
 
-print("little list: ", little_list)
-print("big list: ", big_list)
+#print("little list: ", little_list)
+#print("big list: ", big_list)
 
 ##looping
 
@@ -85,12 +85,12 @@ for day in range(0, final_time, del_t): #gives list 0->364, 365 entries
     
     if day % 365 == 0:
         
-        print("on day ", day, "cumulative list is ", little_list)
+        #print("on day ", day, "cumulative list is ", little_list)
         plt.figure(1)
         #heat.append(temps)
         year = int(day/365)
         big_list[year] = [val/365 for val in little_list] #takes average per lat for the year, put it in first list of the 2d list
-        print("list of lists indexed at year: ", year, "is ", big_list[year])
+        #print("list of lists indexed at year: ", year, "is ", big_list[year])
         #add up all lists from element -1 to element -10
         #FIVE YEAR AVERAGE WHILE I TEST IT
         if day > 365*6:

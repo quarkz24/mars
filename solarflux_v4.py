@@ -22,7 +22,7 @@ start = time.time()
 ##constants
 
 a = 149597870.7*1000
-q = 1360
+q = 1362 #per second
 
 latlist = [0, 0.17, 0.35, 0.52, 0.70, 0.87, 1.05, 1.22, 1.40, 1.57]
 for lat in latlist: #in radians

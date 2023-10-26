@@ -18,16 +18,17 @@ start = time.time()
 
 ##constants
 
-q = 1360
+q = 1362
 d = 5.394e2 #diffusivity
 c = (5.25e9) #heat cap, initially constant, of dry planet
 sb = 5.670374419e-8 #stefan-boltzmann constant
+a = 0.3
 
 n = 144
 del_t = 1
 del_lamb = 3.1415/n #in degrees->radians
-initial_temp = 400
-years = 80
+initial_temp = 300
+years = 150
 final_time = 365*years #years * days
 
 second_to_day = 24*60*60
@@ -52,6 +53,7 @@ for day in range(0, final_time, del_t): #gives list 0->364, 365 entries
         
         #albedo
         a = 0.525 - 0.245*np.tanh((temps[y]-268)/5)
+        print("albedo at ", lats[y], "is ", a)
         
         temp_diff[y] = (2*del_t/c)*(second_to_day*solar[y][day]*(1-a) - d*np.tan(lats[y])*((temps[y+1]-temps[y-1])/2*del_lamb) + d*((temps[y+1]-2*temps[y] + temps[y-1])/(del_lamb**2)) - ir)
 
@@ -61,7 +63,7 @@ for day in range(0, final_time, del_t): #gives list 0->364, 365 entries
     
     #albedo
     a = 0.525 - 0.245*np.tanh((temps[0]-268)/5)
-    
+    print("albedo at ", lats[y], "is ", a)
     temp_diff[0] = (2*del_t/c)*(second_to_day*solar[y][day]*(1-a) - d*((temps[y+1] - temps[y])/del_lamb**2) - ir) #south pole - what is day-1 for first day?
     
     #ir cooling function
@@ -70,7 +72,7 @@ for day in range(0, final_time, del_t): #gives list 0->364, 365 entries
     
     #albedo
     a = 0.525 - 0.245*np.tanh((temps[len(lats)-1]-268)/5)
-    
+    print("albedo at ", lats[y], "is ", a)
     temp_diff[len(lats)-1] = (2*del_t/c)*(second_to_day*solar[y][day]*(1-a) - d*(temps[y] - temps[y-1])/(del_lamb**2) - ir) # north pole
     
     temps = temp_diff + temps
