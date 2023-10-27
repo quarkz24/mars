@@ -27,7 +27,7 @@ def constants():
     del_t = 1
     del_lamb = 3.1415/n #in degrees->radians
     initial_temp = 300
-    years = 40
+    years = 10
     final_time = 365*years #years * days
     return second_to_day, q, d, cl, sb, n, del_t, del_lamb, initial_temp, years, final_time
 
@@ -64,7 +64,10 @@ def heatcap(capacity):
 
 def heatmap(array):
     plt.figure(figsize=(10,10))
-    heat_map = sns.heatmap(np.array(array).T, linewidth = 0 , annot = False, cbar_kws={'label': 'Temperature (K)'}, yticklabels = 6)
+    #heat_map = sns.heatmap(np.array(array).T, linewidth = 0 , annot = False, cbar_kws={'label': 'Temperature (K)'}, yticklabels = 5)
+    #plt.yticks(np.arange(0, 1, step=1/n), lats)
+    plt.imshow(np.array(array).T, extent=[0, years, 90, -90], aspect = 'auto')
+
     plt.title(f"Temperatures per year as model settles over ${years}$ years, at each latitude")
     plt.xlabel("Year")
     plt.ylabel("Latitude")
@@ -112,7 +115,7 @@ def convergence_test_2(diff_list):
     plt.ylabel("$\delta$, K")
     plt.show()
     
-def temp_difference(index): #goes even crazier when i sub in functions for ir, a
+def temp_difference(index): 
     if index != 0 and index != n-1: #most latitudes
         ir, a = outgoing_2(y)
         temp_diff[index] = (del_t/heatcap(cl))*(second_to_day*solar[y][day]*(1-a) - d*np.tan(lats[index])*((temps[index+1]-temps[index-1])/2*del_lamb) + d*((temps[index+1]-2*temps[index] + temps[index-1])/(del_lamb**2)) - ir)
