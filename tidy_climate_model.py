@@ -11,7 +11,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import time
 from flux_function import flux
-import seaborn as sns
 
 start = time.time()
 
@@ -27,11 +26,12 @@ def constants():
     del_t = 1
     del_lamb = 3.1415/n #in degrees->radians
     initial_temp = 300
-    years = 10
+    years = 100
+    partial_years = 5*years #to plot changing seasons
     final_time = 365*years #years * days
-    return second_to_day, q, d, cl, sb, n, del_t, del_lamb, initial_temp, years, final_time
+    return second_to_day, q, d, cl, sb, n, del_t, del_lamb, initial_temp, years, partial_years, final_time
 
-second_to_day, q, d, cl, sb, n, del_t, del_lamb, initial_temp, years, final_time = constants()
+second_to_day, q, d, cl, sb, n, del_t, del_lamb, initial_temp, years, partial_years, final_time = constants()
 
 def list_of_lists():
     temps = [initial_temp]*n #144 length list of initial temps
@@ -39,8 +39,7 @@ def list_of_lists():
     lats = np.linspace(-1.57, 1.57, n) #both start and end inclusive
     solar = flux(lats, final_time) #returns a list of lists, indexable, returns list of flux over a year per lat
     temp_diff = np.empty(n) # empty list
-    heat = [[0] for i in range(years)]
-    #heat2 = #how to do this to get right amount of lists? int((years*365)/182)? this could still return a decimal
+    heat = [[0] for i in range(partial_years)]
     cumu = np.zeros(n)
     true_diff = np.zeros(years)
     percent_diff = np.zeros(years)
@@ -64,10 +63,8 @@ def heatcap(capacity):
 
 def heatmap(array):
     plt.figure(figsize=(10,10))
-    #heat_map = sns.heatmap(np.array(array).T, linewidth = 0 , annot = False, cbar_kws={'label': 'Temperature (K)'}, yticklabels = 5)
-    #plt.yticks(np.arange(0, 1, step=1/n), lats)
-    plt.imshow(np.array(array).T, extent=[0, years, 90, -90], aspect = 'auto')
-
+    plt.imshow(np.array(array).T, extent=[0, years, 90, -90], aspect = 'auto', cmap = 'plasma')
+    plt.colorbar(label = "Temperature, K", orientation = "vertical")
     plt.title(f"Temperatures per year as model settles over ${years}$ years, at each latitude")
     plt.xlabel("Year")
     plt.ylabel("Latitude")
@@ -140,6 +137,10 @@ for day in range(0, final_time, del_t): #gives list 0->364, 365 entries
     temps = change + temps
     cumu = cumu + temps
     
+    if day % 73 == 0:
+        x = int(day/73)
+        heat[x] = temps
+    
     if day % 365 == 0:
         year = int(day/365)
         
@@ -147,8 +148,6 @@ for day in range(0, final_time, del_t): #gives list 0->364, 365 entries
         percent_diff[year] = np.average(abs((coakley_fit[y]-temps[y])/coakley_fit[y])*100)
         self_diff[year] = np.average(abs(temps - prev_temps))
         prev_temps = temps
-        
-        heat[year] = temps
         
         av_list.append([val/365 for val in cumu])
         cumu = np.zeros(n) #clear cumulative list for next year
@@ -167,7 +166,7 @@ for day in range(0, final_time, del_t): #gives list 0->364, 365 entries
         plt.ylabel('Temps')
         plt.legend()
         plt.show()
-        plt.pause(0.01) 
+        #plt.pause(0.01) 
 
 heatmap(heat)
 convergence_test_1a(true_diff)
