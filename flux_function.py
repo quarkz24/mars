@@ -13,7 +13,7 @@ Created on Tue Oct 10 15:35:41 2023
 ##import packages
 
 import numpy as np
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 #import time
 
 ##constants (can get rid of these when its a functioning function)
@@ -35,13 +35,12 @@ def flux(latlist, d):
         tantheta = np.tan(lat)
         
         flux = []
-    
         for day in range(0, d, 1):
         
             #2*3.1415/365 to convert day to position around sun
             #delta remains in rad to feed into my trig functions
             
-            delta = -0.409*np.cos((2*3.1415/365)*(day + 10))
+            delta = -0.409*np.cos((2*np.pi/365)*(day + 10))
             
             if -tantheta*np.tan(delta) >1:
                 big_h = np.arccos(1)
@@ -50,13 +49,14 @@ def flux(latlist, d):
             else:
                 big_h = np.arccos(-tantheta * np.tan(delta))
             
-            solar = (q/3.1415) * (((149597870.7*1000)/a)**2) * (big_h*sintheta*np.sin(delta) + costheta*np.cos(delta)*np.sin(big_h))
+            solar = (q/np.pi) * (((149597870.7*1000)/a)**2) * (big_h*sintheta*np.sin(delta) + costheta*np.cos(delta)*np.sin(big_h))
             flux.append(solar)
             
-        #plt.plot(np.arange(0, 365, 1), flux, linestyle = '--', label = f'$latitude = {lat}$')
+        #plt.plot(np.arange(0, d, 1), flux, linestyle = '--', label = f'$latitude = {lat}$')
         #print("flux at", lat,":", flux)
         all_flux.append(flux)
         
     return(all_flux)
 
-#print(flux(latlist, 365))
+#flux(latlist, 365)
+

@@ -21,8 +21,19 @@ start = time.time()
 
 ##constants
 
-a = 149597870.7*1000
+##earth
+a = (149597870.7*1000)
 q = 1362 #per second
+#delta = -0.409*np.cos((2*3.1415/365)*(day + 10))
+days = 365
+
+##mars
+a = (149597870.7*1000)*1.524
+q = 589
+#delta = -0.438*np.cos((2*3.1415/687)*(day)) #present day obliquity is 25.1deg (variable over hundreds of thousands of years)
+days = 687
+
+
 
 latlist = [0, 0.17, 0.35, 0.52, 0.70, 0.87, 1.05, 1.22, 1.40, 1.57]
 for lat in latlist: #in radians
@@ -33,13 +44,12 @@ for lat in latlist: #in radians
     
     flux = []
 
-    for day in range(0, 365, 1):
+    for day in range(0, 687, 1):
     
         #2*3.1415/365 to convert day to position around sun
         #delta remains in rad to feed into my trig functions
         
-        delta = -0.409*np.cos((2*3.1415/365)*(day + 10))
-        #big_h = np.arccos(-tantheta * np.tan(delta))
+        delta = -0.438*np.cos((2*3.1415/687)*(day))
         
         if -tantheta*np.tan(delta) >1:
             big_h = np.arccos(1)
@@ -51,7 +61,7 @@ for lat in latlist: #in radians
         solar = (q/3.1415) * (((149597870.7*1000)/a)**2) * (big_h*sintheta*np.sin(delta) + costheta*np.cos(delta)*np.sin(big_h))
         flux.append(solar)
         
-    plt.plot(np.arange(0, 365, 1), flux, linestyle = '--', label = f'$latitude = {lat}$')
+    plt.plot(np.arange(0, 687, 1), flux, linestyle = '--', label = f'$latitude = {lat}$')
 
 ##TESTING
 #print("delta list is:", d)
@@ -82,12 +92,12 @@ for lat in latlist2: #in radians
     
     flux = []
 
-    for day in range(0, 365, 1):
+    for day in range(0, 687, 1):
     
         #2*3.1415/365 to convert day to position around sun
         #delta remains in rad to feed into my trig functions
             
-        delta = -0.409*np.cos((2*3.1415/365)*(day + 10))
+        delta = -0.438*np.cos((2*3.1415/687)*(day))
         #big_h = np.arccos(-tantheta * np.tan(delta))
         
         if -tantheta*np.tan(delta) >1:
@@ -100,7 +110,7 @@ for lat in latlist2: #in radians
         solar = (q/3.1415) * (((149597870.7*1000)/a)**2) * (big_h*sintheta*np.sin(delta) + costheta*np.cos(delta)*np.sin(big_h))
         flux.append(solar)
         
-    plt.plot(np.arange(0, 365, 1), flux, linestyle = '--', label = f'$latitude = {lat}$')
+    plt.plot(np.arange(0, 687, 1), flux, linestyle = '--', label = f'$latitude = {lat}$')
 
 ##TESTING
 #print("delta list is:", d)

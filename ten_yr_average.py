@@ -15,33 +15,40 @@ import seaborn as sns
 
 start = time.time()
 
-##constants
+def constants():
+    second_to_day = 24*60*60
+    q = 1362
+    d = (5.394e-1)*second_to_day #diffusivity
+    #cl = (5.25e6) #heat cap, initially constant, of dry planet
+    cl = 5.25e7
+    sb = 5.670374419e-8 #stefan-boltzmann constant
+    n = 144
+    del_t = 1
+    del_lamb = 3.1415/n #in degrees->radians
+    initial_temp = 300
+    years = 200
+    final_time = 365*years #years * days
+    return second_to_day, q, d, cl, sb, n, del_t, del_lamb, initial_temp, years, final_time
 
-second_to_day = 24*60*60
-q = 1362
-d = (5.394e-1)*second_to_day #diffusivity
-#cl = (5.25e6) #heat cap, initially constant, of dry planet
-cl = 5.25e7
-sb = 5.670374419e-8 #stefan-boltzmann constant
-n = 144
-del_t = 1
-del_lamb = 3.1415/n #in degrees->radians
-initial_temp = 300
-years = 40
-final_time = 365*years #years * days
+second_to_day, q, d, cl, sb, n, del_t, del_lamb, initial_temp, years, final_time = constants()
 
-##arrays+lists
+def list_of_lists():
+    temps = [initial_temp]*n #144 length list of initial temps
+    prev_temps = [initial_temp]*n
+    lats = np.linspace(-1.57, 1.57, n) #both start and end inclusive
+    solar = flux(lats, final_time) #returns a list of lists, indexable, returns list of flux over a year per lat
+    temp_diff = np.empty(n) # empty list
+    heat = [[0] for i in range(years)]
+    #heat2 = #how to do this to get right amount of lists? int((years*365)/182)? this could still return a decimal
+    cumu = np.zeros(n)
+    true_diff = np.zeros(years)
+    percent_diff = np.zeros(years)
+    self_diff = np.zeros(years)
+    av_list = []
+    coakley_fit = 302.3 - 45.3*(np.sin(lats)**2)
+    return temps, prev_temps, lats, solar, temp_diff, heat, cumu, true_diff, percent_diff, self_diff, av_list, coakley_fit
 
-temps = [initial_temp]*n #144 length list of initial temps
-lats = np.linspace(-1.57, 1.57, n) #both start and end inclusive
-solar = flux(lats, final_time) #returns a list of lists, indexable, returns list of flux over a year per lat
-temp_diff = np.empty(n) # empty list
-heat = [[0] for i in range(years)]
-cumu = np.zeros(n)
-true_diff = np.zeros(years)
-percent_diff = np.zeros(years)
-av_list = []
-coakley_fit = 302.3 - 45.3*(np.sin(lats)**2)
+temps, prev_temps, lats, solar, temp_diff, heat, cumu, true_diff, percent_diff, self_diff, av_list, coakley_fit = list_of_lists()
 
 ##functions
 
@@ -97,10 +104,17 @@ def convergence_test_1b(diff_list):
     plt.ylabel("Mean difference, %")
     plt.show()
 
+def convergence_test_2(diff_list):
+    plt.figure(figsize=(10,10))
+    plt.plot(np.arange(0, years), diff_list)
+    plt.title("Convergence test 2: $\delta$ = $|T_{year} - T_{year-1}|$")
+    plt.xlabel("Year")
+    plt.ylabel("$\delta$, K")
+    plt.show()
+    
 ##looping
 
 for day in range(0, final_time, del_t): #gives list 0->364, 365 entries
-
     for y in range(len(lats)-1): #0->143, 144 entries
         
         ir, a = outgoing_2(y)
@@ -115,20 +129,28 @@ for day in range(0, final_time, del_t): #gives list 0->364, 365 entries
     temps = temp_diff + temps
     cumu = cumu + temps
     
+    #if day % 182 == 0:
+        #heat2[i] = 
+    
     if day % 365 == 0:
-        
         year = int(day/365)
+        
         true_diff[year] = np.average(abs(coakley_fit - temps))
         percent_diff[year] = np.average(abs((coakley_fit[y]-temps[y])/coakley_fit[y])*100)
+        self_diff[year] = np.average(abs(temps - prev_temps))
+        prev_temps = temps
+        
         heat[year] = temps
+        
         av_list.append([val/365 for val in cumu])
         cumu = np.zeros(n) #clear cumulative list for next year
+        
         plt.figure(1)
         if year > 9:
             add = [sum(i) for i in zip(av_list[-1], av_list[-2], av_list[-3], av_list[-4], av_list[-5], av_list[-6], av_list[-7], av_list[-8], av_list[-9], av_list[-10])]
             div = [val/10 for val in add]
             plt.plot(lats, div, label = "10 year average", color = 'blue', linestyle = '--') #ten yr average
-        
+            
         plt.plot(lats, temps, label = "finite diff method", color = 'blue') #temps per year
         plt.plot(lats, n*[273.15], color = 'black') #zero degrees celcius
         plt.plot(lats, coakley_fit, label = "N&C fit", color = 'red') #coakley model
@@ -138,12 +160,10 @@ for day in range(0, final_time, del_t): #gives list 0->364, 365 entries
         plt.legend()
         plt.show() 
 
-##heatmap
 heatmap(heat)
-
-##convergence testing
 convergence_test_1a(true_diff)
 convergence_test_1b(percent_diff)
+convergence_test_2(self_diff)
 
 end = time.time()
 print("Time elapsed:", end - start)
