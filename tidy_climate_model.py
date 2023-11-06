@@ -24,10 +24,10 @@ def constants():
     #cl = 5.25e7
     sb = 5.670374419e-8 #stefan-boltzmann, J s^-1 m^-2 K^-4
     n = 30
-    del_t = int((24*60*60)/2)
+    del_t = int((24*60*60))
     del_lamb = np.pi/(n-1) #in degrees->radians
     initial_temp = 300
-    years = 40
+    years = 200
     partial_years = 5*years #to plot changing seasons
     final_time = 365*years #years * days
     seconds = final_time*(24*60*60)
@@ -59,11 +59,11 @@ def heatcap(capacity): #applying proportional lands to other temps is bad
     if temps[y] >= 273:
         c = cl*40*0.7 + cl*0.3
     elif 263 < temps[y] < 273:
-        c = fraction*9.2*cl + (1-fraction)*cl
+        #print("fraction at ", temps[y], " is ", fraction)
         c = 0.7*(fraction*9.2*cl + (1-fraction)*40*cl) + 0.3*cl
     else:
         c = 0.7*2*cl + 0.3*cl #used to be 2
-        #c = 2*cl
+        c = 2*cl
     return c
 
 def heatmap(array):
@@ -197,7 +197,7 @@ for s in range(0, seconds, del_t): #change this back to del_t? gives list 0->364
         plt.plot(lats, temps, label = "finite diff method", color = 'blue') #temps per year
         plt.plot(lats, n*[273.15], color = 'black') #zero degrees celcius
         plt.plot(lats, coakley_fit, label = "N&C fit", color = 'red') #coakley model
-        plt.axis([-1.57, 1.57, 250, 305])
+        plt.axis([-1.57, 1.57, 240, 305])
         plt.xlabel(f'latitude, $year = {day/365}$')
         plt.ylabel('Temps')
         plt.legend()
