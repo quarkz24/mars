@@ -1,0 +1,31 @@
+\contentsline {title}{The Martian Climate: humid past and arid present}{1}{}
+\contentsline {abstract}{Abstract}{1}{}
+\tocdepth@munge 
+\contentsline {section}{\numberline {}Contents}{2}{}
+\tocdepth@restore 
+\contentsline {section}{\numberline {I}Introduction}{3}{}
+\contentsline {subsection}{\numberline {A}Is There Life on Mars?}{3}{}
+\contentsline {subsection}{\numberline {B}Martian History}{3}{}
+\contentsline {subsection}{\numberline {C}Climate Modelling}{5}{}
+\contentsline {subsubsection}{\numberline {1}Energy Balance Models}{5}{}
+\contentsline {subsubsection}{\numberline {2}General Circulation Models}{5}{}
+\contentsline {section}{\numberline {II}Development of the Earth Validation Model}{6}{}
+\contentsline {subsection}{\numberline {A}Atmospheric Diffusion Differential Equation}{6}{}
+\contentsline {subsubsection}{\numberline {1}Incoming Flux}{7}{}
+\contentsline {subsubsection}{\numberline {2}Outgoing Flux}{7}{}
+\contentsline {subsection}{\numberline {B}Computational Parameters for Solving the Model}{8}{}
+\contentsline {subsection}{\numberline {C}Model solutions for Earth}{8}{}
+\contentsline {section}{\numberline {III}Application to Present-Day Mars}{9}{}
+\contentsline {subsection}{\numberline {A}Model Adaptations}{9}{}
+\contentsline {subsection}{\numberline {B}Incorporation of the $\mathrm {CO_2}$ Cycle for Mars}{10}{}
+\contentsline {subsection}{\numberline {C}Model solutions for Mars}{13}{}
+\contentsline {section}{\numberline {IV}Investigation of Ancient Mars}{15}{}
+\contentsline {subsection}{\numberline {A}Exploring Orbital Parameters and the Faint Young Sun Paradox}{15}{}
+\contentsline {subsection}{\numberline {B}Model solutions for Ancient Mars}{17}{}
+\contentsline {subsection}{\numberline {C}Limitations of the Ancient Mars Model}{19}{}
+\contentsline {section}{\numberline {V}Potential for Future Work}{20}{}
+\contentsline {section}{\numberline {VI}Concluding Remarks}{20}{}
+\contentsline {section}{\numberline {}Acknowledgments}{20}{}
+\contentsline {section}{\numberline {}References}{21}{}
+\contentsline {section}{\numberline {VII}Summary for a General Audience}{23}{}
+\contentsline {section}{\numberline {VIII}Appendices}{24}{}
