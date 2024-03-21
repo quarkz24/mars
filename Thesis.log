@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2023.2.21)  12 MAR 2024 16:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.10) (preloaded format=pdflatex 2023.2.21)  21 MAR 2024 00:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -365,6 +365,21 @@ LaTeX Warning: Label `fig:test' multiply defined.
 LaTeX Warning: Label `fig:test' multiply defined.
 
 
+LaTeX Warning: Label `fig:test' multiply defined.
+
+
+LaTeX Warning: Label `fig:test' multiply defined.
+
+
+LaTeX Warning: Label `fig:test' multiply defined.
+
+
+LaTeX Warning: Label `fig:test' multiply defined.
+
+
+LaTeX Warning: Label `fig:test' multiply defined.
+
+
 LaTeX Warning: Label `fig:sub1' multiply defined.
 
 
@@ -375,24 +390,6 @@ LaTeX Warning: Label `fig:sub2' multiply defined.
 
 
 LaTeX Warning: Label `sub@fig:sub2' multiply defined.
-
-
-LaTeX Warning: Label `fig:test' multiply defined.
-
-
-LaTeX Warning: Label `fig:test' multiply defined.
-
-
-LaTeX Warning: Label `fig:test' multiply defined.
-
-
-LaTeX Warning: Label `fig:test' multiply defined.
-
-
-LaTeX Warning: Label `fig:test' multiply defined.
-
-
-LaTeX Warning: Label `fig:test' multiply defined.
 
 
 LaTeX Warning: Label `fig:test' multiply defined.
@@ -518,159 +515,302 @@ toc)
 
  [2]
 
-LaTeX Warning: Command \textgreater invalid in math mode on input line 92.
+LaTeX Warning: Command \textgreater invalid in math mode on input line 99.
 
 LaTeX Font Info:    Trying to load font information for OML+ptm on input line 9
-2.
+9.
 (C:\Users\josep\Documents\MikTeX\tex/latex/psnfss\omlptm.fd
 File: omlptm.fd 
 )
 LaTeX Font Info:    Font shape `OML/ptm/m/n' in size <12> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 92.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 99.
 
 
-LaTeX Warning: Command \textgreater invalid in math mode on input line 92.
+LaTeX Warning: Command \textgreater invalid in math mode on input line 99.
 
 [3]
-<valleys.png, id=21, 722.7pt x 348.55219pt>
+<valleys.png, id=17, 722.7pt x 348.55219pt>
 File: valleys.png Graphic file (type png)
 <use valleys.png>
-Package pdftex.def Info: valleys.png  used on input line 107.
+Package pdftex.def Info: valleys.png  used on input line 110.
 (pdftex.def)             Requested size: 426.79134pt x 205.84077pt.
  [4 <./valleys.png>] [5] [6] [7]
-<EarthNorthFlux.png, id=41, 395.4775pt x 262.9825pt>
+<earth_flowchart.png, id=41, 597.73312pt x 845.40843pt>
+File: earth_flowchart.png Graphic file (type png)
+<use earth_flowchart.png>
+Package pdftex.def Info: earth_flowchart.png  used on input line 237.
+(pdftex.def)             Requested size: 455.24408pt x 643.88446pt.
+ [8] [9 <./earth_flowchart.png>]
+<Earth5yrsHeatmapNew.png, id=50, 1283.54532pt x 1280.53406pt>
+File: Earth5yrsHeatmapNew.png Graphic file (type png)
+<use Earth5yrsHeatmapNew.png>
+Package pdftex.def Info: Earth5yrsHeatmapNew.png  used on input line 254.
+(pdftex.def)             Requested size: 398.33858pt x 397.39133pt.
+<EarthNorthFlux.png, id=51, 395.4775pt x 262.9825pt>
 File: EarthNorthFlux.png Graphic file (type png)
 <use EarthNorthFlux.png>
-Package pdftex.def Info: EarthNorthFlux.png  used on input line 240.
+Package pdftex.def Info: EarthNorthFlux.png  used on input line 263.
 (pdftex.def)             Requested size: 227.62204pt x 151.36223pt.
-<EarthSouthFlux.png, id=42, 395.4775pt x 262.9825pt>
+<EarthSouthFlux.png, id=52, 395.4775pt x 262.9825pt>
 File: EarthSouthFlux.png Graphic file (type png)
 <use EarthSouthFlux.png>
-Package pdftex.def Info: EarthSouthFlux.png  used on input line 246.
+Package pdftex.def Info: EarthSouthFlux.png  used on input line 269.
 (pdftex.def)             Requested size: 227.62204pt x 151.36223pt.
- [8]
-<Earth5yrsHeatmapNew.png, id=47, 1283.54532pt x 1280.53406pt>
-File: Earth5yrsHeatmapNew.png Graphic file (type png)
-<use Earth5yrsHeatmapNew.png>
-Package pdftex.def Info: Earth5yrsHeatmapNew.png  used on input line 258.
-(pdftex.def)             Requested size: 398.33858pt x 397.39133pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<Convergence.png, id=48, 417.56pt x 262.9825pt>
-File: Convergence.png Graphic file (type png)
-<use Convergence.png>
-Package pdftex.def Info: Convergence.png  used on input line 275.
-(pdftex.def)             Requested size: 227.62204pt x 143.36073pt.
-<MarsConvergence.png, id=49, 417.56pt x 262.9825pt>
-File: MarsConvergence.png Graphic file (type png)
-<use MarsConvergence.png>
-Package pdftex.def Info: MarsConvergence.png  used on input line 281.
-(pdftex.def)             Requested size: 227.62204pt x 143.36073pt.
-[9 <./EarthNorthFlux.png> <./EarthSouthFlux.png>] [10 <./Earth5yrsHeatmapNew.pn
-g>]
-<flowchart2.png, id=58, 597.73312pt x 845.40843pt>
+ [10 <./EarthNorthFlux.png> <./EarthSouthFlux.png>]
+<mars_flowchart.png, id=58, 597.73312pt x 845.40843pt>
+File: mars_flowchart.png Graphic file (type png)
+<use mars_flowchart.png>
+Package pdftex.def Info: mars_flowchart.png  used on input line 296.
+(pdftex.def)             Requested size: 455.24408pt x 643.88446pt.
+ [11 <./Earth5yrsHeatmapNew.png>]
+[12 <./mars_flowchart.png>]
+<flowchart2.png, id=65, 597.73312pt x 845.40843pt>
 File: flowchart2.png Graphic file (type png)
 <use flowchart2.png>
-Package pdftex.def Info: flowchart2.png  used on input line 323.
+Package pdftex.def Info: flowchart2.png  used on input line 326.
 (pdftex.def)             Requested size: 426.79134pt x 603.63686pt.
- [11 <./Convergence.png> <./MarsConvergence.png>] [12 <./flowchart2.png>]
-<Mars5yrsHeatmapNew.png, id=68, 1283.54532pt x 1280.53406pt>
+ [13] [14 <./flowchart2.png>] [15]
+
+LaTeX Warning: Reference `diffusionequation' on page 16 undefined on input line
+ 386.
+
+<mars_flux_new.png, id=77, 1259.4553pt x 895.09406pt>
+File: mars_flux_new.png Graphic file (type png)
+<use mars_flux_new.png>
+Package pdftex.def Info: mars_flux_new.png  used on input line 400.
+(pdftex.def)             Requested size: 455.24408pt x 323.54478pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<Mars5yrsHeatmapNew.png, id=78, 1283.54532pt x 1280.53406pt>
 File: Mars5yrsHeatmapNew.png Graphic file (type png)
 <use Mars5yrsHeatmapNew.png>
-Package pdftex.def Info: Mars5yrsHeatmapNew.png  used on input line 376.
+Package pdftex.def Info: Mars5yrsHeatmapNew.png  used on input line 423.
+(pdftex.def)             Requested size: 398.33858pt x 397.39133pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[16] [17 <./mars_flux_new.png>]
+<mars_pressure2.png, id=86, 796.47563pt x 542.025pt>
+File: mars_pressure2.png Graphic file (type png)
+<use mars_pressure2.png>
+Package pdftex.def Info: mars_pressure2.png  used on input line 447.
+(pdftex.def)             Requested size: 398.33858pt x 271.07799pt.
+ [18 <./Mars5yrsHeatmapNew.png>] [19 <./mars_pressure2.png>] [20]
+Underfull \hbox (badness 10000) in paragraph at lines 484--486
+
+ []
+
+<obliquity_heatmaps_new.png, id=98, 1283.54532pt x 1280.53406pt>
+File: obliquity_heatmaps_new.png Graphic file (type png)
+<use obliquity_heatmaps_new.png>
+Package pdftex.def Info: obliquity_heatmaps_new.png  used on input line 498.
+(pdftex.def)             Requested size: 483.69684pt x 482.56335pt.
+
+Overfull \hbox (28.45273pt too wide) in paragraph at lines 498--499
+ [][] 
+ []
+
+[21]
+Underfull \hbox (badness 10000) in paragraph at lines 503--505
+
+ []
+
+<eccentricity_heatmaps_new.png, id=102, 1283.54532pt x 1280.53406pt>
+File: eccentricity_heatmaps_new.png Graphic file (type png)
+<use eccentricity_heatmaps_new.png>
+Package pdftex.def Info: eccentricity_heatmaps_new.png  used on input line 509.
+
+(pdftex.def)             Requested size: 483.69684pt x 482.56335pt.
+
+Overfull \hbox (28.45273pt too wide) in paragraph at lines 509--510
+ [][] 
+ []
+
+[22 <./obliquity_heatmaps_new.png>] [23 <./eccentricity_heatmaps_new.png>]
+<ancient_mars_heatmap_new.png, id=109, 1283.54532pt x 1280.53406pt>
+File: ancient_mars_heatmap_new.png Graphic file (type png)
+<use ancient_mars_heatmap_new.png>
+Package pdftex.def Info: ancient_mars_heatmap_new.png  used on input line 526.
 (pdftex.def)             Requested size: 398.33858pt x 397.39133pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[13] [14 <./Mars5yrsHeatmapNew.png>]
-<mars_pressure2.png, id=76, 796.47563pt x 542.025pt>
-File: mars_pressure2.png Graphic file (type png)
-<use mars_pressure2.png>
-Package pdftex.def Info: mars_pressure2.png  used on input line 400.
-(pdftex.def)             Requested size: 398.33858pt x 271.07799pt.
+
+LaTeX Warning: Command \textgreater invalid in math mode on input line 541.
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
+LaTeX Warning: Command \textgreater invalid in math mode on input line 541.
 
+[24]
 
-Underfull \hbox (badness 10000) in paragraph at lines 408--410
+Package natbib Warning: Citation `W12' on page 25 undefined on input line 549.
 
+[25 <./ancient_mars_heatmap_new.png>] [26]
+Underfull \hbox (badness 1082) in paragraph at lines 603--604
+\OT1/ptm/m/n/10.95 IPCC, Geneva, Switzer-land, 35-115. Avail-able: https://www.
+ipcc.ch/report/sixth-assessment-
+ []
+
+[27]
+Underfull \hbox (badness 10000) in paragraph at lines 629--630
+[]\OT1/ptm/m/n/10.95 F. P. For-get, R. T. Pier-re-hum-bert, "Warm-ing early Mar
+s with car-bon diox-ide
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 411--413
-
- []
-
-[15]
-<obliquity_heatmaps_new.png, id=80, 1283.54532pt x 1280.53406pt>
-File: obliquity_heatmaps_new.png Graphic file (type png)
-<use obliquity_heatmaps_new.png>
-Package pdftex.def Info: obliquity_heatmaps_new.png  used on input line 420.
-(pdftex.def)             Requested size: 483.69684pt x 482.56335pt.
-
-Overfull \hbox (28.45273pt too wide) in paragraph at lines 420--421
- [][] 
+Underfull \hbox (badness 7504) in paragraph at lines 629--630
+\OT1/ptm/m/n/10.95 clouds that scat-ter in-frared ra-di-a-tion", Sci-ence, vol.
+ 278, 1273-1276 (1997). DOI:
  []
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<eccentricity_heatmaps_new.png, id=81, 1283.54532pt x 1280.53406pt>
-File: eccentricity_heatmaps_new.png Graphic file (type png)
-<use eccentricity_heatmaps_new.png>
-Package pdftex.def Info: eccentricity_heatmaps_new.png  used on input line 432.
-
-(pdftex.def)             Requested size: 483.69684pt x 482.56335pt.
-
-Overfull \hbox (28.45273pt too wide) in paragraph at lines 432--433
- [][] 
+Underfull \hbox (badness 10000) in paragraph at lines 631--632
+[]\OT1/ptm/m/n/10.95 H. H. Ki-ef-fer, "Mars South Po-lar Spring and Sum-mer Tem
+-per-a-tures: A Resid-
  []
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[16 <./mars_pressure2.png>]
-<ancient_mars_heatmap.png, id=86, 615.29875pt x 599.23875pt>
-File: ancient_mars_heatmap.png Graphic file (type png)
-<use ancient_mars_heatmap.png>
-Package pdftex.def Info: ancient_mars_heatmap.png  used on input line 444.
-(pdftex.def)             Requested size: 398.33858pt x 387.94615pt.
- [17 <./obliquity_heatmaps_new.png>] [18 <./eccentricity_heatmaps_new.png>]
-
-LaTeX Warning: Command \textgreater invalid in math mode on input line 459.
+Underfull \hbox (badness 3849) in paragraph at lines 631--632
+\OT1/ptm/m/n/10.95 ual $[]$ Frost", Jour-nal of Geo-phys-i-cal Re-search, vol. 
+84, 8263-8288 (1979). DOI:
+ []
 
 
-LaTeX Warning: Command \textgreater invalid in math mode on input line 459.
+Underfull \hbox (badness 3536) in paragraph at lines 635--636
+[]\OT1/ptm/m/n/10.95 M. R. T. Hoke, B. M. Hynek, G. E. Tucker, "For-ma-tion tim
+escales of large Mar-
+ []
 
-[19 <./ancient_mars_heatmap.png>] [20] [21]
+
+Underfull \hbox (badness 1320) in paragraph at lines 635--636
+\OT1/ptm/m/n/10.95 tian val-ley net-works", Earth and Plan-e-tary Sci-ence Let-
+ters, vol. 312, 1-12 (2011). DOI:
+ []
+
+
+Underfull \hbox (badness 1354) in paragraph at lines 641--642
+[]\OT1/ptm/m/n/10.95 H. Wang, M. I. Richard-son, "The ori-gin, evo-lu-tion, and
+ tra-jec-tory of large dust storms
+ []
+
+
+Underfull \hbox (badness 1092) in paragraph at lines 641--642
+\OT1/ptm/m/n/10.95 on Mars dur-ing Mars years 24-30 (1999-2011)", Icarus, vol. 
+251, 112-127 (2015). DOI:
+ []
+
+[28]
+Underfull \hbox (badness 1354) in paragraph at lines 649--650
+[]\OT1/ptm/m/n/10.95 H. Wang, M. I. Richard-son, "The ori-gin, evo-lu-tion, and
+ tra-jec-tory of large dust storms
+ []
+
+
+Underfull \hbox (badness 4995) in paragraph at lines 661--662
+[]\OT1/ptm/m/n/10.95 C. I. Fas-sett, J. W. Head, "The tim-ing of mar-tian val-l
+ey net-work ac-tiv-ity: Con-
+ []
+
+
+Underfull \hbox (badness 1270) in paragraph at lines 661--662
+\OT1/ptm/m/n/10.95 straints from buffered crater count-ing", Icarus, vol. 195, 
+iss. 1, pp. 61-89 (2008). DOI:
+ []
+
+
+Underfull \hbox (badness 6461) in paragraph at lines 663--664
+[]\OT1/ptm/m/n/10.95 J. W. Head \OT1/ptm/m/it/10.95 et al.\OT1/ptm/m/n/10.95 , 
+"Pos-si-ble an-cient oceans on Mars: ev-i-dence from Mars Or-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 663--664
+\OT1/ptm/m/n/10.95 biter Laser Al-time-ter data", Sci-ence, vol 286, pp. 2134-2
+137 (1999). DOI:
+ []
+
+
+Underfull \hbox (badness 1533) in paragraph at lines 674--675
+[]\OT1/ptm/m/n/10.95 D. A. Minton, R. Mal-ho-tra, "As-sess-ing the mas-sive you
+ng sun hy-poth-e-sis to solve the
+ []
+
 No file Thesis.bbl.
-[22] [23]
-<Earth50yrsHeatmapNew.png, id=110, 1283.54532pt x 1280.53406pt>
+[29] [30]
+<Earth50yrsHeatmapNew.png, id=132, 1283.54532pt x 1280.53406pt>
 File: Earth50yrsHeatmapNew.png Graphic file (type png)
 <use Earth50yrsHeatmapNew.png>
-Package pdftex.def Info: Earth50yrsHeatmapNew.png  used on input line 561.
+Package pdftex.def Info: Earth50yrsHeatmapNew.png  used on input line 694.
 (pdftex.def)             Requested size: 227.62204pt x 227.08633pt.
 File: Earth5yrsHeatmapNew.png Graphic file (type png)
 <use Earth5yrsHeatmapNew.png>
-Package pdftex.def Info: Earth5yrsHeatmapNew.png  used on input line 567.
+Package pdftex.def Info: Earth5yrsHeatmapNew.png  used on input line 700.
 (pdftex.def)             Requested size: 227.62204pt x 227.08633pt.
- [24 <./Earth50yrsHeatmapNew.png>] (Thesis.aux)
+<Convergence.png, id=133, 417.56pt x 262.9825pt>
+File: Convergence.png Graphic file (type png)
+<use Convergence.png>
+Package pdftex.def Info: Convergence.png  used on input line 713.
+(pdftex.def)             Requested size: 227.62204pt x 143.36073pt.
+<MarsConvergence.png, id=134, 417.56pt x 262.9825pt>
+File: MarsConvergence.png Graphic file (type png)
+<use MarsConvergence.png>
+Package pdftex.def Info: MarsConvergence.png  used on input line 719.
+(pdftex.def)             Requested size: 227.62204pt x 143.36073pt.
+ [31 <./Earth50yrsHeatmapNew.png> <./Convergence.png> <./MarsConvergence.png>]
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 7
+34.
+ (C:\Users\josep\Documents\MikTeX\tex/latex/psnfss\ot1pcr.fd
+File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
+)
+Overfull \hbox (19.95569pt too wide) in paragraph at lines 765--765
+[]        \OT1/pcr/m/n/12 first_order_term = -d*np.tan(lats[index])*((temps[ind
+ex+1][] 
+ []
+
+
+Overfull \hbox (5.5557pt too wide) in paragraph at lines 765--765
+[]        \OT1/pcr/m/n/12 temp_diff[index] = (second_order_term + first_order_t
+erm[] 
+ []
+
+
+Overfull \hbox (27.15569pt too wide) in paragraph at lines 765--765
+[]        \OT1/pcr/m/n/12 second_order_term = d*((temps[0+1] - temps[0])/del_la
+mb**2)[] 
+ []
+
+
+Overfull \hbox (48.75568pt too wide) in paragraph at lines 765--765
+[]        \OT1/pcr/m/n/12 second_order_term = -d*((temps[-1] - temps[-1-1])/del
+_lamb**2)[] 
+ []
+
+
+Package natbib Warning: There were undefined citations.
+
+[32] (Thesis.aux
+
+Package natbib Warning: Citation(s) may have changed.
+(natbib)                Rerun to get citations correct.
+
+)
+
+LaTeX Warning: There were undefined references.
+
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 7320 strings out of 475385
- 115224 string characters out of 2783004
- 478434 words of memory out of 3000000
- 28597 multiletter control sequences out of 15000+600000
- 490692 words of font info for 72 fonts, out of 8000000 for 9000
+ 7437 strings out of 475385
+ 116968 string characters out of 2783004
+ 477410 words of memory out of 3000000
+ 28706 multiletter control sequences out of 15000+600000
+ 491207 words of font info for 74 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 67i,13n,77p,2197b,559s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ 67i,13n,77p,3066b,522s stack positions out of 10000i,1000n,20000p,200000b,80000s
 {C:/Users/josep/Documents/MikTeX/fonts/enc/dvips/base/8r.enc}<C:/Users/josep/
 Documents/MikTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><C:/Users/josep/Docu
 ments/MikTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/josep/Document
@@ -683,12 +823,13 @@ lic/amsfonts/cm/cmr6.pfb><C:/Users/josep/Documents/MikTeX/fonts/type1/public/am
 sfonts/cm/cmr8.pfb><C:/Users/josep/Documents/MikTeX/fonts/type1/public/amsfonts
 /cm/cmsy10.pfb><C:/Users/josep/Documents/MikTeX/fonts/type1/public/amsfonts/cm/
 cmsy6.pfb><C:/Users/josep/Documents/MikTeX/fonts/type1/public/amsfonts/cm/cmsy8
-.pfb><C:/Users/josep/Documents/MikTeX/fonts/type1/urw/times/utmb8a.pfb><C:/User
-s/josep/Documents/MikTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/josep/Docum
-ents/MikTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on Thesis.pdf (24 pages, 6259614 bytes).
+.pfb><C:/Users/josep/Documents/MikTeX/fonts/type1/urw/courier/ucrr8a.pfb><C:/Us
+ers/josep/Documents/MikTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/josep/Doc
+uments/MikTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/josep/Documents/MikTeX
+/fonts/type1/urw/times/utmri8a.pfb>
+Output written on Thesis.pdf (32 pages, 7575526 bytes).
 PDF statistics:
- 177 PDF objects out of 1000 (max. 8388607)
+ 212 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 66 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 81 words of extra memory for PDF output out of 10000 (max. 10000000)
 
